@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from './UserContext';
 import InterestsSelection from './InterestsSelection';
@@ -12,7 +12,7 @@ const AuthPage = () => {
     const [age, setAge] = useState('');
     const [gender, setGender] = useState('');
     const [occupation, setOccupation] = useState('');
-    const [interests, setInterests] = useState([]);
+    const [isUsernameUnique, setIsUsernameUnique] = useState(true); 
 
     const handleLoginClick = () => {
         setCurrentView('login');
@@ -26,20 +26,32 @@ const AuthPage = () => {
         setSelectedUser(e.target.value);
     };
 
+    useEffect(() => {
+        // Check if the entered username is unique whenever it changes
+        const usernameExists = users.some(user => user.username === username);
+        setIsUsernameUnique(!usernameExists);
+    }, [username, users]);
+
     const handleLogin = () => {
         if (selectedUser) {
             loginUser(selectedUser);
+            console.log(users); // Adding this to log the current users state
             navigate('/home');
         }
     };
 
     const handleInterestsSelected = (selectedInterests) => {
-        const newUser = { username, age, gender, occupation, interests: selectedInterests };
+        const newUser = {
+            username,
+            age,
+            gender,
+            occupation,
+            interests: selectedInterests,
+          };
         addUser(newUser);
+        console.log(users); // Adding this to log the current users state
         navigate('/home');
     };
-
-    console.log(users); // Add this inside your AuthPage component to log the current users state
 
     return (
         <div className="container d-flex flex-column align-items-center justify-content-center" style={{ height: '100vh' }}>
@@ -79,6 +91,7 @@ const AuthPage = () => {
                     <h2>Register</h2>
                     <br></br>
                         <input className="form-control" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+                        { !isUsernameUnique && <p style={{color: 'red'}}>Username is already taken, please choose another one.</p> }
                         <br></br>
                         <input className="form-control" type="number" placeholder="Age" value={age} onChange={(e) => setAge(e.target.value)} />
                         <br></br>
@@ -89,7 +102,9 @@ const AuthPage = () => {
                             <option value="other">Other</option>
                         </select><br></br>
                         <input className="form-control" placeholder="Occupation" value={occupation} onChange={(e) => setOccupation(e.target.value)} /><br></br>
-                    <button className="btn btn-primary m-2" onClick={() => setCurrentView('interests')}>Next</button>
+                        <button className="btn btn-primary m-2" onClick={() => setCurrentView('interests')} disabled={!isUsernameUnique || !username}>
+                           Next
+                        </button>
                 </>
             )}
             {currentView === 'interests' && (

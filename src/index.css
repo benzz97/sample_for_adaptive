@@ -145,3 +145,15 @@ code {
 .fa-thumbs-down {
   font-size: 1.2rem;
 }
+
+.like-button.active, .dislike-button.active {
+  background-color: #007bff; /* Example active color */
+  color: white;
+}
+
+.like-button, .dislike-button {
+  /* Initial button styling */
+  border: 1px solid #ddd;
+  background-color: #f8f9fa;
+  color: #333;
+}

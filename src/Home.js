@@ -1,96 +1,25 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
+//import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { UserContext } from './UserContext';
+import articlesData from './articlesData';
 
-// Sample article data (normally you would get this from an API call)
 const sampleArticleData = {
   status: "ok",
   totalResults: 13927,
-  articles: [
-    {
-      source: {
-        id: "a1",
-        name: "Wired"
-      },
-      author: "Joel Khalili",
-      title: "What’s Behind the Bitcoin Price Surge? Vibes, Mostly",
-      description: "The price of bitcoin has climbed to a new all-time high. But assigning the cryptocurrency a value is anything but trivial.",
-      url: "https://www.wired.com/story/bitcoin-price-record-economics/",
-      urlToImage: "https://media.wired.com/photos/65ef46042ca08b0e59a9682f/191:100/w_1280,c_limit/031124-business-bitcoin-economics.jpg",
-      publishedAt: "2024-03-12T18:13:56Z",
-      content: "The latest surge in the price of bitcoin is increasing the clamor around it, says Dal Bianco, drawing in yet more speculators and creating a self-reinforcing cycle. Likewise, when collective confiden… [+2967 chars]"
-    },
-    {
-        source: {
-          id: "a2",
-          name: "Wired"
-        },
-        author: "Joel Khalili",
-        title: "What’s Behind the Bitcoin Price Surge? Vibes, Mostly",
-        description: "The price of bitcoin has climbed to a new all-time high. But assigning the cryptocurrency a value is anything but trivial.",
-        url: "https://www.wired.com/story/bitcoin-price-record-economics/",
-        urlToImage: "https://media.wired.com/photos/65ef46042ca08b0e59a9682f/191:100/w_1280,c_limit/031124-business-bitcoin-economics.jpg",
-        publishedAt: "2024-03-12T18:13:56Z",
-        content: "The latest surge in the price of bitcoin is increasing the clamor around it, says Dal Bianco, drawing in yet more speculators and creating a self-reinforcing cycle. Likewise, when collective confiden… [+2967 chars]"
-      },
-      {
-        source: {
-          id: "a3",
-          name: "Wired"
-        },
-        author: "Joel Khalili",
-        title: "What’s Behind the Bitcoin Price Surge? Vibes, Mostly",
-        description: "The price of bitcoin has climbed to a new all-time high. But assigning the cryptocurrency a value is anything but trivial.",
-        url: "https://www.wired.com/story/bitcoin-price-record-economics/",
-        urlToImage: "https://media.wired.com/photos/65ef46042ca08b0e59a9682f/191:100/w_1280,c_limit/031124-business-bitcoin-economics.jpg",
-        publishedAt: "2024-03-12T18:13:56Z",
-        content: "The latest surge in the price of bitcoin is increasing the clamor around it, says Dal Bianco, drawing in yet more speculators and creating a self-reinforcing cycle. Likewise, when collective confiden… [+2967 chars]"
-      },
-      {
-        source: {
-          id: "a4",
-          name: "Wired"
-        },
-        author: "Joel Khalili",
-        title: "What’s Behind the Bitcoin Price Surge? Vibes, Mostly",
-        description: "The price of bitcoin has climbed to a new all-time high. But assigning the cryptocurrency a value is anything but trivial.",
-        url: "https://www.wired.com/story/bitcoin-price-record-economics/",
-        urlToImage: "https://media.wired.com/photos/65ef46042ca08b0e59a9682f/191:100/w_1280,c_limit/031124-business-bitcoin-economics.jpg",
-        publishedAt: "2024-03-12T18:13:56Z",
-        content: "The latest surge in the price of bitcoin is increasing the clamor around it, says Dal Bianco, drawing in yet more speculators and creating a self-reinforcing cycle. Likewise, when collective confiden… [+2967 chars]"
-      },
-      {
-        source: {
-          id: "a5",
-          name: "Wired"
-        },
-        author: "Joel Khalili",
-        title: "What’s Behind the Bitcoin Price Surge? Vibes, Mostly",
-        description: "The price of bitcoin has climbed to a new all-time high. But assigning the cryptocurrency a value is anything but trivial.",
-        url: "https://www.wired.com/story/bitcoin-price-record-economics/",
-        urlToImage: "https://media.wired.com/photos/65ef46042ca08b0e59a9682f/191:100/w_1280,c_limit/031124-business-bitcoin-economics.jpg",
-        publishedAt: "2024-03-12T18:13:56Z",
-        content: "The latest surge in the price of bitcoin is increasing the clamor around it, says Dal Bianco, drawing in yet more speculators and creating a self-reinforcing cycle. Likewise, when collective confiden… [+2967 chars]"
-      },
-      {
-        source: {
-          id: "a6",
-          name: "Wired"
-        },
-        author: "Joel Khalili",
-        title: "What’s Behind the Bitcoin Price Surge? Vibes, Mostly",
-        description: "The price of bitcoin has climbed to a new all-time high. But assigning the cryptocurrency a value is anything but trivial.",
-        url: "https://www.wired.com/story/bitcoin-price-record-economics/",
-        urlToImage: "https://media.wired.com/photos/65ef46042ca08b0e59a9682f/191:100/w_1280,c_limit/031124-business-bitcoin-economics.jpg",
-        publishedAt: "2024-03-12T18:13:56Z",
-        content: "The latest surge in the price of bitcoin is increasing the clamor around it, says Dal Bianco, drawing in yet more speculators and creating a self-reinforcing cycle. Likewise, when collective confiden… [+2967 chars]"
-      },
-    // ... Add more articles as needed
-  ]
+  articles: articlesData
 };
 
 const HomePage = () => {
+  const navigate = useNavigate();
   const [articles, setArticles] = useState(sampleArticleData.articles); 
   const [searchTerm, setSearchTerm] = useState('');
+  const { users, updateUserInteractions, currentUser } = useContext(UserContext);
+
+  const handleArticleClick = (articleId) => {
+      updateUserInteractions(currentUser.username, 'readArticles', articleId);
+      navigate(`/article/${articleId}`);
+  };
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
@@ -123,11 +52,15 @@ const HomePage = () => {
       </div>
     </div>
 
-
       <div className="article-list">
         {articles.map((article, index) => (
-          <Link to={`/article/${article.source.id}`} key={article.source.id} className="article-link">  
-          <div key={index} className="article-card">
+          //<Link to={`/article/${article.source.id}`} key={article.source.id} className="article-link">
+          <div 
+          key={article.source.id} 
+            className="article-card" 
+            onClick={() => handleArticleClick(article.source.id)}
+            style={{ cursor: 'pointer' }} // Add cursor style for visual feedback
+          >
             <div className="article-text">
               <h5 className="title">{article.title}</h5>
               <p className="description">{article.description}</p>
@@ -140,7 +73,6 @@ const HomePage = () => {
               <img src={article.urlToImage} className="thumbnail" alt={article.title} />
             </div>
           </div>
-          </Link>
         ))}
       </div>
     </div>
