@@ -8,6 +8,7 @@ export const UserProvider = ({ children }) => {
 
     const addUser = (user) => {
         setUsers(prevUsers => [...prevUsers, user]);
+        setCurrentUser(user);
     };
 
     const loginUser = (username) => {

@@ -11,3 +11,137 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Home.css */
+
+.home-container {
+  padding: 1rem;
+}
+
+.article-list {
+  width: 100%;
+  max-width: 800px; /* Adjust this to ensure articles don't stretch too wide */
+  margin: 0 auto; /* Center the list with automatic margins */
+}
+
+.header {
+  width: 100%;
+  max-width: 800px; 
+  margin: 0 auto; 
+  padding: 1rem 0; 
+}
+
+.article-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for transform and box-shadow */
+  display: flex;
+  width: 100%; /* Take up all available width up to the max-width of the parent */
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.article-card:hover {
+  transform: translateY(-5px); /* Moves the card up slightly */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds shadow to make it 'pop' */
+}
+
+.article-text {
+  flex-grow: 1;
+  padding: 1rem;
+}
+
+.title {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.description {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.article-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.thumbnail-container {
+  flex-shrink: 0; /* Prevents the image from shrinking */
+}
+
+.thumbnail {
+  width: 100px; /* Adjust width as needed */
+  height: 100px; /* Adjust height as needed */
+  object-fit: cover; /* Keeps aspect ratio, crops to fit */
+  margin-left: 1rem;
+}
+
+.text-muted {
+  font-size: 0.875rem;
+}
+
+.article-link {
+  text-decoration: none; /* Removes underline */
+  color: inherit; /* Inherits text color from parent */
+}
+
+
+/* ArticlePage.css */
+
+.article-page {
+  padding: 1rem;
+  max-width: 800px; /* Or your preferred max width */
+  margin: 0 auto; /* Center the content */
+}
+
+.author-and-date {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.author {
+  margin: 0;
+}
+
+.date {
+  margin: 0;
+  font-style: italic;
+  color: #666; /* This is a light grey, but choose a color that fits your design */
+}
+
+.article-page img {
+  width: 100%;
+  height: auto;
+  margin: 1rem 0; /* Add some space around the image */
+}
+
+.reaction-buttons {
+  /* Align the buttons horizontally */
+  display: flex;
+  gap: 10px; /* Adjust the space between buttons */
+}
+
+.like-button,
+.dislike-button {
+  border: none;
+  color: white; /* Text color */
+  padding: 10px 20px; /* Padding inside the buttons */
+  font-size: 1rem; /* Text size */
+  border-radius: 50rem; /* Pill shape */
+  cursor: pointer; /* Mouse pointer */
+  display: flex;
+  align-items: center;
+  gap: 5px; /* Space between icon and text */
+  background-color: #0d6efd; /* Example blue background for like button */
+}
+
+.dislike-button {
+  background-color: #dc3545; /* Example red background for dislike button */
+}
+
+/* Adjust icon sizes if needed */
+.fa-thumbs-up,
+.fa-thumbs-down {
+  font-size: 1.2rem;
+}
