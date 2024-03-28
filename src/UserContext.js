@@ -7,7 +7,7 @@ export const UserProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(null); // To hold the currently logged-in user
 
     const addUser = (user) => {
-        const newUser = { ...user, readArticles: [], likedArticles: [], dislikedArticles: [] };
+        const newUser = { ...user, readArticles: [], likedArticles: []};
         setUsers(prevUsers => [...prevUsers, newUser]);
         setCurrentUser(newUser);
     };
@@ -39,10 +39,9 @@ const updateUserInteractions = (username, interactionType, articleId) => {
         users.map(user => {
             if (user.username === username) {
                 const isArticleLiked = user.likedArticles.includes(articleId);
-                const isArticleDisliked = user.dislikedArticles.includes(articleId);
 
                 let updatedLikedArticles = [...user.likedArticles];
-                let updatedDislikedArticles = [...user.dislikedArticles];
+                let updatedReadArticles = [...user.readArticles];
 
                 if (interactionType === 'likedArticles') {
                     if (isArticleLiked) {
@@ -50,25 +49,16 @@ const updateUserInteractions = (username, interactionType, articleId) => {
                         console.log(`${username} unclicked the Like button`); 
                     } else {
                         updatedLikedArticles.push(articleId);
-                        updatedDislikedArticles = updatedDislikedArticles.filter(id => id !== articleId);
                         console.log(`${username} liked the article`); 
                     }
-                } else if (interactionType === 'dislikedArticles') {
-                    if (isArticleDisliked) {
-                        updatedDislikedArticles = updatedDislikedArticles.filter(id => id !== articleId);
-                        console.log(`${username} unclicked the Dislike button`); 
-                    } else {
-                        updatedDislikedArticles.push(articleId);
-                        updatedLikedArticles = updatedLikedArticles.filter(id => id !== articleId);
-                        console.log(`${username} disliked the article`); 
-
-                    }
+                } else if (interactionType === 'readArticle') {
+                        updatedReadArticles.push(articleId);
+                        console.log(`${username} clicked the article ${articleId} to read`); 
                 }
-
                 return {
                     ...user,
+                    readArticles: updatedReadArticles,
                     likedArticles: updatedLikedArticles,
-                    dislikedArticles: updatedDislikedArticles,
                 };
             }
             return user;

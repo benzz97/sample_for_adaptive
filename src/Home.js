@@ -17,7 +17,7 @@ const HomePage = () => {
   const { users, updateUserInteractions, currentUser } = useContext(UserContext);
 
   const handleArticleClick = (articleId) => {
-      updateUserInteractions(currentUser.username, 'readArticles', articleId);
+      updateUserInteractions(currentUser.username, 'readArticle', articleId);
       navigate(`/article/${articleId}`);
   };
 

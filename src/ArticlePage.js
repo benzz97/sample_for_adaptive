@@ -12,13 +12,12 @@ const ArticlePage = () => {
 
   // States to track if the user has liked or disliked the current article
   const [hasLiked, setHasLiked] = useState(false);
-  const [hasDisliked, setHasDisliked] = useState(false);
+  //const [hasDisliked, setHasDisliked] = useState(false);
 
   // Check if the current article is liked or disliked when component mounts or currentUser changes
   useEffect(() => {
     if (currentUser) {
       setHasLiked(currentUser.likedArticles.includes(article.source.id));
-      setHasDisliked(currentUser.dislikedArticles.includes(article.source.id));
     }
   }, [currentUser, article.source.id]);
 
@@ -26,31 +25,8 @@ const ArticlePage = () => {
     if (currentUser) {
       updateUserInteractions(currentUser.username, 'likedArticles', article.source.id);
       setHasLiked(!hasLiked); // Toggle like state
-      if (hasDisliked) setHasDisliked(false); // If previously disliked, unset dislike
     }
   };
-
-  const handleDislike = () => {
-    if (currentUser) {
-      updateUserInteractions(currentUser.username, 'dislikedArticles', article.source.id);
-      setHasDisliked(!hasDisliked); // Toggle dislike state
-      if (hasLiked) setHasLiked(false); // If previously liked, unset like
-    }
-  };
-  /*
-  const handleLike = () => {
-    if (currentUser) {
-      console.log(`Attempting to like article ${article.source.id} for user ${currentUser?.username}`);
-        updateUserInteractions(currentUser.username, 'likedArticles', article.source.id); 
-    }
-  };
-
-  const handleDislike = () => {
-    if (currentUser) {
-        updateUserInteractions(currentUser.username, 'dislikedArticles', article.source.id);
-    }
-  };
-  */
 
   if (!article) {
     return <div>Article not found!</div>;
@@ -68,9 +44,6 @@ const ArticlePage = () => {
       <div className="reaction-buttons">
         <button className={`like-button ${hasLiked ? 'active' : ''}`} onClick={handleLike}>
           <FontAwesomeIcon icon={faThumbsUp} /> Like
-        </button>
-        <button className={`dislike-button ${hasDisliked ? 'active' : ''}`} onClick={handleDislike}>
-          <FontAwesomeIcon icon={faThumbsDown} /> Dislike
         </button>
       </div>
     </div>
