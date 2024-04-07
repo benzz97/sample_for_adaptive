@@ -1,0 +1,38 @@
+.user-interests-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+}
+
+.interest-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-top:10px;
+}
+
+.interest-item label {
+    flex-basis: 20%;
+    margin-right: 10px;
+
+}
+
+.interest-item input[type='range'] {
+    flex-grow: 1;
+}
+
+.interest-item span {
+    margin-left: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    border: 1px solid #8b8c8d;
+    background-color: #bbdce9;
+    transition: background-color 0.3s ease;
+}
+button:hover{
+    background-color: #f8f9fa;
+}

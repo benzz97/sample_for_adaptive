@@ -31,17 +31,65 @@ code {
   padding: 1rem 0; 
 }
 
+
+.button-group {
+  display: flex;
+  justify-content: center; /* This will center the buttons horizontally */
+  gap: 10px; /* This adds space between your buttons */
+}
+
+.nav-button {
+  padding: 10px 20px;
+  border: 1px solid #8b8c8d;
+  background-color: #bbdce9;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.user-model-button {
+  padding: 10px 20px;
+  border: 1px solid #e13c3c;
+  background-color: #99e19e;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.nav-button:hover, .user-model-button:hover{
+  background-color: #f8f9fa;
+}
+
 .article-card {
   transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for transform and box-shadow */
   display: flex;
-  width: 100%; /* Take up all available width up to the max-width of the parent */
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+  padding: 1rem;
   margin-bottom: 1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  flex-direction: column;/* Stack items vertically */
+  align-items: flex-start; /* Align items to the start of the flex container */
+}
+
+.article-content {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  flex-direction: row; /* Lay items out horizontally */
+  width: 100%; /* Take full width */
+}
+
+.article-expanded-info {
+  display: none; /* Hide by default */
+}
+
+.article-card:hover .article-expanded-info {
+  display: block; /* Show on hover */
 }
 
 .article-card:hover {
-  transform: translateY(-5px); /* Moves the card up slightly */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds shadow to make it 'pop' */
+  border-color: #000; 
+  background-color: #faf4e3; 
 }
 
 .article-text {
@@ -49,30 +97,52 @@ code {
   padding: 1rem;
 }
 
+.article-image-container {
+  flex-shrink: 0;
+  width: 120px; /* Adjust as needed */
+  height: 120px; /* Adjust as needed */
+  overflow: hidden;
+}
+
+.article-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Additional styles */
 .title {
-  font-size: 1.25rem;
-  margin-bottom: 0.5rem;
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+.time {
+  font-size: 0.75rem; 
+  color: #6c757d; 
+  margin-bottom: 1.5rem; 
+}
+
+.article-meta {
+  font-size: 0.8rem;
+  color: #555;
 }
 
 .description {
-  font-size: 1rem;
-  margin-bottom: 1rem;
-}
-
-.article-footer {
-  display: flex;
-  justify-content: space-between;
-}
-
-.thumbnail-container {
-  flex-shrink: 0; /* Prevents the image from shrinking */
-}
-
-.thumbnail {
-  width: 100px; /* Adjust width as needed */
-  height: 100px; /* Adjust height as needed */
-  object-fit: cover; /* Keeps aspect ratio, crops to fit */
   margin-left: 1rem;
+}
+
+.keywords {
+  margin-left: 1rem;
+}
+
+.keyword {
+  display: inline-block;
+  background-color: #e7fafa;
+  padding: 0.3rem;
+  margin-top: 0.5rem;
+  margin-right: 0.5rem;
+  font-size: 0.7rem;
 }
 
 .text-muted {
@@ -83,7 +153,6 @@ code {
   text-decoration: none; /* Removes underline */
   color: inherit; /* Inherits text color from parent */
 }
-
 
 /* ArticlePage.css */
 
@@ -152,3 +221,4 @@ code {
   background-color: #f8f9fa;
   color: #333;
 }
+

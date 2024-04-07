@@ -8,8 +8,8 @@ export const UserProvider = ({ children }) => {
 
     const addUser = (user) => {
         const newUser = { ...user, readArticles: [], likedArticles: []};
-        setUsers(prevUsers => [...prevUsers, newUser]);
         setCurrentUser(newUser);
+        setUsers(prevUsers => [...prevUsers, newUser]);
     };
 
     const loginUser = (username) => {

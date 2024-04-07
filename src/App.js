@@ -4,6 +4,11 @@ import { UserProvider } from './UserContext';
 import AuthPage from './AuthPage';
 import Home from './Home';
 import ArticlePage from './ArticlePage'; 
+import SRpage from './SourceRecommendations';
+import LRpage from './LiftRecommendations';
+import CRpage from './CategoriesRecommendation';
+import UserModelpage from './UserModel';
+
 
 function App() {
     return (
@@ -12,6 +17,10 @@ function App() {
                 <Routes>
                     <Route path="/" element={<AuthPage />} />
                     <Route path="/home" element={<Home />} />
+                    <Route path="/SRpage" element={<SRpage />} />
+                    <Route path="/LRpage" element={<LRpage />} />
+                    <Route path="/CRpage" element={<CRpage />} />
+                    <Route path="/UserModelpage" element={<UserModelpage/>} />
                     <Route path="/article/:id" element={<ArticlePage />} /> 
                     {/* ...other routes */}
                 </Routes>
