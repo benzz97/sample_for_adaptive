@@ -56,6 +56,10 @@ const CRpage = () => {
     setHoveredArticleId(null);
   };
 
+  const handleBackToHome = () => {
+    navigate('/home');
+  };
+
     return (      
         <div className="home-container">
           <div className="header d-flex justify-content-between align-items-center">
@@ -96,6 +100,25 @@ const CRpage = () => {
   </div>
 ))}
       </div>
+      {/* Floating Back to Home Button */}
+      <button 
+        className="floating-btn" 
+        onClick={handleBackToHome}
+        style={{
+          position: 'fixed',
+          bottom: '20px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          padding: '10px 20px',
+          borderRadius: '15px',
+          backgroundColor: '#007bff',
+          color: '#fff',
+          border: 'none',
+          cursor: 'pointer',
+          zIndex: 1000 // Ensure it stays on top
+        }}>
+        Back to Home
+      </button>
     </div>
   );
 };

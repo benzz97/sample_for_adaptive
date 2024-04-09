@@ -43,10 +43,6 @@ const SRpage = () => {
       navigate(`/article/${articleId}`);
   };
 
-  const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
-
   const handleArticleHover = (articleId) => {
     setHoveredArticleId(articleId);
   };
@@ -56,6 +52,10 @@ const SRpage = () => {
     setHoveredArticleId(null);
   };
 
+  const handleBackToHome = () => {
+    navigate('/home');
+  };
+
     return (      
         <div className="home-container">
           <div className="header d-flex justify-content-between align-items-center">
@@ -63,39 +63,58 @@ const SRpage = () => {
           </div>
       
         <div className="article-list">
-  {articlesData.map((article) => (
-  <div 
-    key={article.articleId} 
-    className="article-card" 
-    onMouseEnter={() => handleArticleHover(article.articleId)}
-    onMouseLeave={handleArticleHoverEnd}
-    onClick={() => handleArticleClick(article.articleId)}
-  >
-    <div className="article-content">
-      <div className="article-text">
-        <span className="time">{timeAgo(article.pubDate)}</span>
-        <h5 className="title">{article.title}</h5>
-        <div className="article-meta">
-          <span className="source">{article.source.domain}</span>
+        {articlesData.map((article) => (
+        <div 
+          key={article.articleId} 
+          className="article-card" 
+          onMouseEnter={() => handleArticleHover(article.articleId)}
+          onMouseLeave={handleArticleHoverEnd}
+          onClick={() => handleArticleClick(article.articleId)}
+        >
+          <div className="article-content">
+            <div className="article-text">
+              <span className="time">{timeAgo(article.pubDate)}</span>
+              <h5 className="title">{article.title}</h5>
+              <div className="article-meta">
+                <span className="source">{article.source.domain}</span>
+              </div>
+            </div>
+            <div className="article-image-container">
+              <img src={article.imageUrl} alt={article.title} className="article-image" />
+            </div>
+          </div>
+          {hoveredArticleId === article.articleId && (
+            <div className="article-expanded-info">
+              <p className="description">{article.description}</p>
+              <div className="keywords">
+                {article.keywords.map((keyword, index) => (
+                  <span key={index} className="keyword">{keyword.name}</span>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
+      ))}
       </div>
-      <div className="article-image-container">
-        <img src={article.imageUrl} alt={article.title} className="article-image" />
-      </div>
-    </div>
-    {hoveredArticleId === article.articleId && (
-      <div className="article-expanded-info">
-        <p className="description">{article.description}</p>
-        <div className="keywords">
-          {article.keywords.map((keyword, index) => (
-            <span key={index} className="keyword">{keyword.name}</span>
-          ))}
-        </div>
-      </div>
-    )}
-  </div>
-))}
-      </div>
+      {/* Floating Back to Home Button */}
+      <button 
+        className="floating-btn" 
+        onClick={handleBackToHome}
+        style={{
+          position: 'fixed',
+          bottom: '20px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          padding: '10px 20px',
+          borderRadius: '15px',
+          backgroundColor: '#007bff',
+          color: '#fff',
+          border: 'none',
+          cursor: 'pointer',
+          zIndex: 1000 // to ensure it stays on top
+        }}>
+        Back to Home
+      </button>
     </div>
   );
 };

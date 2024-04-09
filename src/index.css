@@ -20,8 +20,8 @@ code {
 
 .article-list {
   width: 100%;
-  max-width: 800px; /* Adjust this to ensure articles don't stretch too wide */
-  margin: 0 auto; /* Center the list with automatic margins */
+  max-width: 800px; 
+  margin: 0 auto; 
 }
 
 .header {
@@ -34,14 +34,15 @@ code {
 
 .button-group {
   display: flex;
-  justify-content: center; /* This will center the buttons horizontally */
-  gap: 10px; /* This adds space between your buttons */
+  justify-content: center; 
+  gap: 10px; 
 }
 
 .nav-button {
   padding: 10px 20px;
   border: 1px solid #8b8c8d;
-  background-color: #bbdce9;
+  background-color: #007bff;
+  color: #fff;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -55,7 +56,7 @@ code {
 }
 
 .nav-button:hover, .user-model-button:hover{
-  background-color: #f8f9fa;
+  background-color: #8f9194;
 }
 
 .article-card {
